@@ -1,8 +1,14 @@
+import { ReactNode } from 'react';
 import { clsx } from 'clsx';
 
 import styles from './alert.module.css';
 
-export default function Alert({ children, type }) {
+interface Props {
+  children: ReactNode;
+  type: string;
+}
+
+export default function Alert({ children, type }: Props) {
   return (
     <div
       className={clsx({

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -5,10 +6,15 @@ import Link from 'next/link';
 import utilStyles from '../styles/utils.module.css';
 import styles from './layout.module.css';
 
+interface Props {
+  children: ReactNode;
+  home?: boolean;
+}
+
 const name = 'André';
 export const siteTitle = 'Next.js Sample Website';
 
-export default function Layout({ children, home }) {
+export default function Layout({ children, home }: Props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +33,7 @@ export default function Layout({ children, home }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header className={styles.header}>
-        {home ? (
+        {home ?? false ? (
           <>
             <Image
               priority
@@ -60,7 +66,7 @@ export default function Layout({ children, home }) {
         )}
       </header>
       <main>{children}</main>
-      {!home && (
+      {!(home ?? false) && (
         <div className={styles.backToHome}>
           <Link href="/">← Back to home</Link>
         </div>
